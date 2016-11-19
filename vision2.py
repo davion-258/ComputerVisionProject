@@ -331,7 +331,7 @@ if __name__ == '__main__':
     
     # Clone seamlessly
     result = cv2.seamlessClone(np.uint8(imgMorph), imgBase, mask, center, cv2.NORMAL_CLONE)
-    $
+
     # Display result
     cv2.imshow("Image 1", img1)
     cv2.imshow("Image 2", img2)
