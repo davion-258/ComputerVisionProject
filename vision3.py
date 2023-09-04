@@ -1,10 +1,3 @@
-# Project: Generate baby face image from his father and mother images
-# Developed by
-#       1412334: Le Hoang Nam
-#       1412669: Ngo Huynh Ngoc Khanh
-# Reference :
-# 
-
 import os
 import cv2
 import numpy as np
@@ -13,8 +6,8 @@ import sys
 
 PREDICTOR_PATH = ".\shape_predictor_68_face_landmarks.dat"
 IMAGE1_PATH = "black1.png"
-IMAGE2_PATH = "test1.jpg"
-IMAGE_BASE_PATH = "base.jpg"
+IMAGE2_PATH = "black2.jpg"
+IMAGE_BASE_PATH = "blackBase.jpg"
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(PREDICTOR_PATH)
@@ -24,9 +17,9 @@ def determineLandmarkPoints(img) :
     
     rects = detector(img, 1)
     if len(rects) > 1:
-        raise TooManyFaces
+        raise 'TooManyFaces'
     if len(rects) == 0:
-        raise NoFaces
+        raise 'NoFaces'
 
     landmarkMatrix = np.matrix([[p.x, p.y] for p in predictor(img, rects[0]).parts()])
     
@@ -37,7 +30,7 @@ def determineLandmarkPoints(img) :
 
 
 # def averagePoints(points1, points2, pointsBase) :
-    # for i in xrange(0, len(points1)):
+    # for i in range(0, len(points1)):
         # x = (1 - beta) * ( 1 - alpha ) * points1[i][0] + alpha * points2[i][0] + beta * pointsBase
         # y = (1 - beta) * ( 1 - alpha ) * points1[i][1] + alpha * points2[i][1] + beta * pointsBase
         # points.append((int(x), int(y)))
@@ -45,7 +38,7 @@ def determineLandmarkPoints(img) :
 def averagePoints(points1, points2, alpha) :
 
     points = []
-    for i in xrange(0, len(points1)):
+    for i in range(0, len(points1)):
         x = ( 1 - alpha ) * points1[i][0] + alpha * points2[i][0]
         y = ( 1 - alpha ) * points1[i][1] + alpha * points2[i][1]
         points.append((int(x), int(y)))
@@ -96,8 +89,8 @@ def calculateTriangles(size, points) :
         if rectContains(rect, pt1) and rectContains(rect, pt2) and rectContains(rect, pt3):
             count = count + 1 
             ind = []
-            for j in xrange(0, 3):
-                for k in xrange(0, len(points)):                    
+            for j in range(0, 3):
+                for k in range(0, len(points)):                    
                     if(abs(pt[j][0] - points[k][0]) < 1.0 and abs(pt[j][1] - points[k][1]) < 1.0):
                         ind.append(k)                            
             if len(ind) == 3:                                                
@@ -139,13 +132,13 @@ if __name__ == '__main__' :
     
     hull = []
     
-    for i in xrange(0, len(hullIndex)):
+    for i in range(0, len(hullIndex)):
         hull.append(points[hullIndex[i]])
 
     # Calculate Rectangle
     x, y, w, h = cv2.boundingRect(np.float32([hull]))
     
-    print img1[x + w/2][y + h/2]
+    print(img1[x + w/2][y + h/2])
     
     # cv2.rectangle(copy, r, pt2, color[, thickness[, lineType[, shift]]])
     

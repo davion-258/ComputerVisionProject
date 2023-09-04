@@ -118,8 +118,8 @@ def getTriangles(size, points):
         if rectContains(rect, pt1) and rectContains(rect, pt2) and rectContains(rect, pt3):
             count = count + 1 
             ind = []
-            for j in xrange(0, 3):
-                for k in xrange(0, len(points)):                    
+            for j in range(0, 3):
+                for k in range(0, len(points)):                    
                     if(abs(pt[j][0] - points[k][0]) < 1.0 and abs(pt[j][1] - points[k][1]) < 1.0):
                         ind.append(k)                            
             if len(ind) == 3:                                                
@@ -185,7 +185,7 @@ def morphTriangle(img1, img2, imgB, img, t1, t2, t, alpha, beta) :
     t2Rect = []
     tRect = []
 
-    for i in xrange(0, 3):
+    for i in range(0, 3):
         tRect.append(((t[i][0] - r[0]),(t[i][1] - r[1])))
         t1Rect.append(((t1[i][0] - r1[0]),(t1[i][1] - r1[1])))
         t2Rect.append(((t2[i][0] - r2[0]),(t2[i][1] - r2[1])))
@@ -253,7 +253,7 @@ if __name__ == '__main__':
     
     hull1 = []
     
-    for i in xrange(0, len(hullIndex1)):
+    for i in range(0, len(hullIndex1)):
         hull1.append(points1_list[hullIndex1[i]])
     
     # Calculate Rectangle
@@ -315,7 +315,7 @@ if __name__ == '__main__':
     
     hull = []
     
-    for i in xrange(0, len(hullIndex)):
+    for i in range(0, len(hullIndex)):
         hull.append(points[hullIndex[i]])
     
     # Calculate Rectangle
